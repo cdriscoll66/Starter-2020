@@ -1,0 +1,49 @@
+name: chimbo
+recipe: pantheon
+config:
+  framework: wordpress
+  site: chimbo
+  id: d768767b-2875-4564-9720-46476f48caea
+colab:
+  lando: 3.0.1
+  recipe: pantheon
+  framework: wordpress
+  version: 1.0.6
+proxy:
+  node:
+    - sync-chimbo.lndo.site:3000
+services:
+  node:
+    type: node:custom
+    ssl: true
+    overrides:
+      ports:
+        - "3000"
+      image: colab/buildtools:node-12
+tooling:
+  composer:
+    service: appserver
+    description: '-- Runs composer commands'
+    cmd: composer
+  npm:
+    service: node
+    description: '-- Runs npm commands'
+    cmd: npm
+  prod:
+    service: node
+    description: '-- Runs production build of assets'
+    cmd: cd $LANDO_MOUNT/wp-content/themes/chimbo/ && npm install && npm run prod
+  watch:
+    service: node
+    description: '-- Runs development build of assets and watch file changes'
+    cmd: cd $LANDO_MOUNT/wp-content/themes/chimbo/ && npm install && npm run watch
+  xdebug-on:
+    service: appserver
+    description: '-- Enable Xdebug for NGINX'
+    cmd: docker-php-ext-enable xdebug && pkill -o -USR2 php-fpm
+    user: root
+  xdebug-off:
+    service: appserver
+    description: '-- Disable Xdebug for NGINX'
+    cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && pkill -o -USR2 php-fpm
+    user: root

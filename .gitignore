@@ -1,5 +1,6 @@
 # WordPress #
 ############
+wp-content/themes/chimbo/node_modules
 wp-config-local.php
 wp-cli.local.yml
 wp-content/uploads
@@ -13,6 +14,7 @@ wp-content/advanced-cache.php
 wp-content/wp-cache-config.php
 sitemap.xml
 sitemap.xml.gz
+
 
 # @TODO writable paths
 wp-content/cache/
@@ -55,3 +57,5 @@ Thumbs.db
 # SASS #
 ##########
 .sass-cache
+
+
