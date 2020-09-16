@@ -40,8 +40,8 @@ const config = {
   // Assets
   // Add any additional asset directories to copy here.
   mix
-   .copyDirectory('resources/assets/images', publicPath('images'))
-   .copyDirectory('resources/assets/fonts', publicPath('fonts'));
+   .copyDirectory('src/images', publicPath('images'))
+   .copyDirectory('src/fonts', publicPath('fonts'));
   
   // Autoload
   mix.autoload({
